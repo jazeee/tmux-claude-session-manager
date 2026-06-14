@@ -96,7 +96,18 @@ Claude Code settings (`~/.claude/settings.json`), merging into any existing
     ],
     "Notification": [
       {
-        "matcher": "",
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.config/tmux/plugins/tmux-claude-session-manager/scripts/state.sh waiting"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "AskUserQuestion",
         "hooks": [
           {
             "type": "command",
@@ -122,11 +133,12 @@ Claude Code settings (`~/.claude/settings.json`), merging into any existing
 
 The state machine:
 
-| Event              | State        | Meaning                   |
-| ------------------ | ------------ | ------------------------- |
-| `UserPromptSubmit` | 🔴 `working` | Busy — leave it           |
-| `Notification`     | 🟡 `waiting` | Needs permission or input |
-| `Stop`             | 🟢 `idle`    | Turn finished — your move |
+| Event                            | State        | Meaning                   |
+| -------------------------------- | ------------ | ------------------------- |
+| `UserPromptSubmit`               | 🔴 `working` | Busy — leave it           |
+| `Notification` (permission)      | 🟡 `waiting` | Needs permission          |
+| `PreToolUse` (`AskUserQuestion`) | 🟡 `waiting` | Asking you a question     |
+| `Stop`                           | 🟢 `idle`    | Turn finished — your move |
 
 > Claude Code reloads `hooks` dynamically — no restart needed. Sessions that are
 > already running start reporting status on their next event once the hooks are
