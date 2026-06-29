@@ -159,6 +159,16 @@ set -g @claude_popup_width     '90%'     # popup width
 set -g @claude_popup_height    '90%'     # popup height
 ```
 
+> **Shell config / env vars:** new sessions run `@claude_command` **directly**, not
+> through your interactive shell — so anything defined in `~/.bashrc` /
+> `~/.bash_aliases` (e.g. `ANTHROPIC_MODEL`, `CLAUDE_CODE_USE_VERTEX`, or a
+> `claude` alias) is **not** picked up. If you rely on those, launch via an
+> interactive shell so your rc files are sourced:
+>
+> ```tmux
+> set -g @claude_command 'bash -ic claude'
+> ```
+
 ## How it works
 
 - The **launcher** creates a detached `claude-<hash-of-dir>` tmux session running
