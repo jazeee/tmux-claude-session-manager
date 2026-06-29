@@ -35,7 +35,7 @@ and kills — sessions just show `?` instead of a color.
 Add to `~/.tmux.conf` (or `~/.config/tmux/tmux.conf`):
 
 ```tmux
-set -g @plugin 'craftzdog/tmux-claude-session-manager'
+set -g @plugin 'jazeee/tmux-claude-session-manager'
 ```
 
 Then hit `prefix` + <kbd>I</kbd> to install.
@@ -48,7 +48,7 @@ Then hit `prefix` + <kbd>I</kbd> to install.
 ### Manual install
 
 ```sh
-git clone https://github.com/craftzdog/tmux-claude-session-manager ~/clone/path
+git clone https://github.com/jazeee/tmux-claude-session-manager ~/clone/path
 ```
 
 Add to `~/.tmux.conf`, then reload (`prefix` + <kbd>r</kbd> or `tmux source ~/.tmux.conf`):
