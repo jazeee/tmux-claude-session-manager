@@ -23,18 +23,41 @@ host_client() {
     awk -v p="$prefix" 'index($2, p) != 1 { print $1; exit }'
 }
 
-# If we are inside a session popup, close it (detach its client)
+# The client that pressed the key, passed by the binding as '#{client_name}'.
+invoker="${1:-}"
+
+# True if $1 names a client currently attached to a non-prefixed session.
+is_live_host() {
+  [ -n "$1" ] || return 1
+  tmux list-clients -F '#{client_name} #{session_name}' 2>/dev/null |
+    awk -v c="$1" -v p="$prefix" \
+      '$1 == c && index($2, p) != 1 { found = 1 } END { exit !found }'
+}
+
+# Pick the client that should host the picker popup.
 sess="$(nested_session)"
 if [ -n "$sess" ]; then
+  # Invoked from inside a session popup. Close it, then reopen on the client that
+  # hosted it (recorded as @claude_parent when this popup was opened) — not the
+  # invoking client, which is the popup we're about to detach, nor an arbitrary
+  # outer client.
   tmux detach-client -s "$sess"
   # Wait until the session is gone
   for _ in $(seq 1 100); do
     [ -z "$(nested_session)" ] && break
     sleep 0.05
   done
+  host="$(tmux show-options -gqv @claude_parent 2>/dev/null)"
+  is_live_host "$host" || host="$(host_client)"
+else
+  # Invoked from a normal pane: host on the invoking client so the popup opens on
+  # the current session, not an arbitrary one.
+  if is_live_host "$invoker"; then
+    host="$invoker"
+  else
+    host="$(host_client)"
+  fi
 fi
-
-host="$(host_client)"
 tmux set-option -g @claude_parent "$host"
 
 # Host the picker on the outer client. -c is honored because that client has no

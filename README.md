@@ -169,9 +169,13 @@ set -g @claude_popup_height    '90%'     # popup height
 - The **picker** lists sessions matching the prefix, reads their state and a live
   `capture-pane` preview, and on selection moves your client to the session's
   origin window before resuming it in the popup.
+- The picker popup is hosted on **the client you pressed `prefix` + `u` from**, so
+  with several clients/sessions attached it always opens on the one you're looking
+  at — not an arbitrary one. The host is recorded in `@claude_parent`.
 - Pressing `prefix` + `u` **from inside a session popup** detaches that popup
-  first (closing it), then reopens the picker full-size on the outer host client —
-  so you never end up with a cramped popup-in-popup.
+  first (closing it), then reopens the picker full-size on the client that hosted
+  it (`@claude_parent`) — so it stays on your current session, and you never end up
+  with a cramped popup-in-popup.
 
 ## License
 
