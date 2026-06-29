@@ -91,7 +91,7 @@ Claude Code settings (`~/.claude/settings.json`), merging into any existing
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/tmux/plugins/tmux-claude-session-manager/scripts/state.sh working"
+            "command": "$HOME/.tmux/plugins/tmux-claude-session-manager/scripts/state.sh working"
           }
         ]
       }
@@ -102,7 +102,7 @@ Claude Code settings (`~/.claude/settings.json`), merging into any existing
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/tmux/plugins/tmux-claude-session-manager/scripts/state.sh waiting"
+            "command": "$HOME/.tmux/plugins/tmux-claude-session-manager/scripts/state.sh waiting"
           }
         ]
       }
@@ -113,7 +113,7 @@ Claude Code settings (`~/.claude/settings.json`), merging into any existing
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/tmux/plugins/tmux-claude-session-manager/scripts/state.sh waiting"
+            "command": "$HOME/.tmux/plugins/tmux-claude-session-manager/scripts/state.sh waiting"
           }
         ]
       }
@@ -124,7 +124,7 @@ Claude Code settings (`~/.claude/settings.json`), merging into any existing
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/tmux/plugins/tmux-claude-session-manager/scripts/state.sh idle"
+            "command": "$HOME/.tmux/plugins/tmux-claude-session-manager/scripts/state.sh idle"
           }
         ]
       }
