@@ -185,9 +185,10 @@ set -g @claude_popup_height    '90%'     # popup height
 - Whether you're "inside a popup" is decided from the **invoking** client alone —
   another client sitting in a Claude session won't make a `prefix` + `u` from your
   normal session reopen over there.
-- Pressing `prefix` + `u` **from inside a session popup** detaches that popup
-  first (closing it), then reopens the picker full-size on the client that hosted
-  it (`@claude_parent`) — so it stays on your current session, and you never end up
+- Pressing `prefix` + `u` **from inside a session popup** detaches **only that
+  popup** (the invoking client — a second client viewing the same Claude session
+  stays put), then reopens the picker full-size on the client that hosted it
+  (`@claude_parent`) — so it stays on your current session, and you never end up
   with a cramped popup-in-popup.
 
 ## License

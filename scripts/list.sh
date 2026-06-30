@@ -39,10 +39,11 @@ is_live_host() {
 inv_sess="$(client_session "$invoker")"
 case "$inv_sess" in
 "$prefix"*)
-  # Invoked from inside a session popup. Close it, then reopen on the client that
-  # hosted it (recorded as @claude_parent when this popup was opened) — not the
-  # invoking client, which is the popup we're about to detach.
-  tmux detach-client -s "$inv_sess"
+  # Invoked from inside a session popup. Close just this popup (the invoking
+  # client) — not every client on the session, or a second client viewing the
+  # same Claude session would be detached too. Then reopen on the client that
+  # hosted it (recorded as @claude_parent when this popup was opened).
+  tmux detach-client -t "$invoker"
   # Wait until the invoking popup is gone.
   for _ in $(seq 1 100); do
     case "$(client_session "$invoker")" in "$prefix"*) sleep 0.05 ;; *) break ;; esac
