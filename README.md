@@ -182,6 +182,9 @@ set -g @claude_popup_height    '90%'     # popup height
 - The picker popup is hosted on **the client you pressed `prefix` + `u` from**, so
   with several clients/sessions attached it always opens on the one you're looking
   at — not an arbitrary one. The host is recorded in `@claude_parent`.
+- Whether you're "inside a popup" is decided from the **invoking** client alone —
+  another client sitting in a Claude session won't make a `prefix` + `u` from your
+  normal session reopen over there.
 - Pressing `prefix` + `u` **from inside a session popup** detaches that popup
   first (closing it), then reopens the picker full-size on the client that hosted
   it (`@claude_parent`) — so it stays on your current session, and you never end up
